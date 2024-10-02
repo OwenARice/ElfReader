@@ -12,8 +12,8 @@ class byteparser:
     def toBytes(number, numbytes):
         bytearr = []
         num = number
-        for i in range(0, numBytes):
+        for i in range(0, numbytes):
             bytearr.insert(0,num % 256)
-            num /= 256
+            num = int(num/256)
         
         return bytearray(bytearr)
