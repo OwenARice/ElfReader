@@ -51,8 +51,17 @@ class elfheader:
         for i in range(0, self.shnum):
             self.secheaders[i].initName(byteArr, nameoffset)
 
-    def setphoff(newoffset):
-        self.ph
+    def setphoff(self, newoffset):
+        self.phoff = newoffset
+        self.bytes[0x20:0x28] = byteparser.toBytes(newoffset, 8)
+    
+    def setshoff(self,newoffset):
+        self.shoff = newoffset
+        self.bytes[0x28:0x30] = byteparser.toBytes(newOffset, 8)
+    
+    def setshstrindex(self,newindex):
+        self.shstrndx = newindex
+        self.bytes[0x3e:0x40] = byteparser.toBytes(newindex,2)
 
     def __str__(self):
         output = ""
@@ -81,7 +90,8 @@ class elfheader:
     def serialize(self):
        with open("a-changed.out", "wb") as outfile:
             
-            output = bytearray([0] * self.fileLength)
+            output = bytearray([0] * (self.fileLength + 4))
+            self.setphoff(self.phoff + 4)
             output[0:0x40] = self.bytes
             index = 0x40
                         
