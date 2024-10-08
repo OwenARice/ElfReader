@@ -97,7 +97,7 @@ class elfheader:
         #I think if I just shuffle the pheaders, I should still end up with a valid elf
         tmp = self.pheaders
         self.pheaders = []
-        for i in range(len(tmp), 0, -1):
+        for i in range(len(tmp)-1, -1, -1):
             self.pheaders.append(tmp[i])
     
 
