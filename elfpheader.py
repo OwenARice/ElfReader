@@ -40,6 +40,7 @@ class elfpheader:
         output = "type: " + type
         output += "\nflags: " + hex(self.flags)
         output += "\noffset: " + hex(self.poffset)
+        output += "\nthis pheader offset: " + hex(self.thispheaderoffset)
         output += f"\nsection covers bytes : {self.poffset} to {self.poffset + self.memsz}"
         output += "\nvirtual address: " + hex(self.vaddr)
         output += "\nphysical address: " + hex(self.paddr)

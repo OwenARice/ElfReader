@@ -114,7 +114,8 @@ class elfheader:
                 output[index:(index + i * self.phentsize)] = self.pheaders[i].bytes
             
             for phdr in self.pheaders:
-                if(not phdr.isPhdr()):
+                if(not phdr.isPhdr() and phdr.poffset > 0x237):
+                    print(f"we're shitting bytes out to: {hex(phdr.poffset)} - {hex(phdr.poffset + phdr.memsz)}")
                     output[phdr.poffset: (phdr.poffset + phdr.memsz)] = phdr.sectionBytes
 
             for i in range(0, len(self.secheaders)):
