@@ -95,7 +95,10 @@ class elfheader:
     def randomize(self):
         #shuffle the headers then fix them up
         #I think if I just shuffle the pheaders, I should still end up with a valid elf
-        random.shuffle(self.pheaders)
+        tmp = self.pheaders
+        self.pheaders = []
+        for i in range(len(tmp), 0, -1):
+            self.pheaders.append(tmp[i])
     
 
     def serialize(self):
