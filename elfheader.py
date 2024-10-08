@@ -1,6 +1,7 @@
 from byteParse import byteparser
 from elfpheader import elfpheader
 from elfsectionheader import sectionheader
+import random
 
 class elfheader:
 
@@ -94,7 +95,7 @@ class elfheader:
     def randomize(self):
         #shuffle the headers then fix them up
         #I think if I just shuffle the pheaders, I should still end up with a valid elf
-        self.pheaders.shuffle()
+        random.shuffle(self.pheaders)
     
 
     def serialize(self):
