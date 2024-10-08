@@ -112,6 +112,7 @@ class elfheader:
             #apparently there's a pheader that holds all the bytes forthe rest of the phdrs
             for i in range(0, len(self.pheaders)):
                 output[index:(index + i * self.phentsize)] = self.pheaders[i].bytes
+                index = index + self.phentsize
             
             for phdr in self.pheaders:
                 if(not phdr.isPhdr() and phdr.poffset > 0x237):
