@@ -111,9 +111,11 @@ class elfheader:
             self.setphoff(self.phoff + 4)
             output[0:0x40] = self.bytes
             index = 0x40
-                        
-            for phdr in self.pheaders:
-                output[index:(index + self.phentsize)] = phdr.bytes
+
+            #apparently there's a pheader that holds all the bytes forthe rest of the phdrs
+            for i in range(0, len(self.pheaders)):
+                if(not self.pheaders[i].isPhdr()):
+                    output[index:(index + i * self.phentsize)] = self.pheaders[i].bytes
             
             for phdr in self.pheaders:
                 output[phdr.poffset: (phdr.poffset + phdr.memsz)] = phdr.sectionBytes

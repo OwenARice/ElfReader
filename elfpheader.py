@@ -26,6 +26,9 @@ class elfpheader:
 
     def size():
         return 0x38
+
+    def isPhdr(self):
+        return (self.ptype == 6)
     
 
     def __str__(self):
