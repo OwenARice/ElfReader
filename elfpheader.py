@@ -7,9 +7,11 @@ class elfpheader:
         
         self.bytes = byteArr[offset:offset + 0x38]
 
+        self.thispheaderoffset = offset  # where in the file is this pheader located?
+
         self.ptype = byteparser.parseBytes(byteArr, offset + 0x0, 4)
         self.flags = byteparser.parseBytes(byteArr, offset + 0x4, 4)
-        self.poffset = byteparser.parseBytes(byteArr, offset + 0x8, 8)
+        self.poffset = byteparser.parseBytes(byteArr, offset + 0x8, 8) #where in the file are the bytes associated with this pheader?
         self.vaddr = byteparser.parseBytes(byteArr, offset + 0x10, 8)
         self.paddr = byteparser.parseBytes(byteArr, offset + 0x18, 8)
         self.filesz = byteparser.parseBytes(byteArr, offset + 0x20, 8)
@@ -18,7 +20,7 @@ class elfpheader:
 
         self.sectionBytes = byteArr[self.poffset:self.poffset + self.memsz]
 
-    def setOffset(newOffset):
+    def setOffset(self, newOffset):
         self.poffset = newOffset
         self.bytes[0x8: 0x10] = byteparser.toBytes(newOffset, 8)
 

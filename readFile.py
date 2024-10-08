@@ -1,5 +1,4 @@
 import sys
-from elf import Elf	
 from elfheader import elfheader
 if(len(sys.argv) < 2):
 	print("usage: readFile.py <file>")

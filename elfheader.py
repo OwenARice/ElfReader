@@ -87,9 +87,21 @@ class elfheader:
 
         return output
     
+    def fixupHeaders(self):
+        #take the newly ordered headers and resolve their references to one another
+
+    def randomize(self):
+        #shuffle the headers then fix them up
+        #I think if I just shuffle the pheaders, I should still end up with a valid elf
+        self.pheaders.shuffle()
+    
+
     def serialize(self):
        with open("a-changed.out", "wb") as outfile:
             
+            #idk, let's give it a shot
+            self.randomize()
+
             output = bytearray([0] * (self.fileLength + 4))
             self.setphoff(self.phoff + 4)
             output[0:0x40] = self.bytes
