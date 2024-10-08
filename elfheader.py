@@ -111,11 +111,11 @@ class elfheader:
 
             #apparently there's a pheader that holds all the bytes forthe rest of the phdrs
             for i in range(0, len(self.pheaders)):
-                if(not self.pheaders[i].isPhdr()):
-                    output[index:(index + i * self.phentsize)] = self.pheaders[i].bytes
+                output[index:(index + i * self.phentsize)] = self.pheaders[i].bytes
             
             for phdr in self.pheaders:
-                output[phdr.poffset: (phdr.poffset + phdr.memsz)] = phdr.sectionBytes
+                if(not phdr.isPhdr()):
+                    output[phdr.poffset: (phdr.poffset + phdr.memsz)] = phdr.sectionBytes
 
             for i in range(0, len(self.secheaders)):
                 curroff = self.shoff + i * 0x40
