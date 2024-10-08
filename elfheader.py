@@ -88,6 +88,7 @@ class elfheader:
         return output
     
     def fixupHeaders(self):
+        return 0
         #take the newly ordered headers and resolve their references to one another
 
     def randomize(self):
