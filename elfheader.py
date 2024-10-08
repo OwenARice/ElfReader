@@ -102,14 +102,14 @@ class elfheader:
        with open("a-changed.out", "wb") as outfile:
             
             #idk, let's give it a shot
-            self.randomize()
+            #self.randomize()
 
             output = bytearray([0] * (self.fileLength + 4))
             self.setphoff(self.phoff + 4)
             output[0:0x40] = self.bytes
             index = 0x40
 
-            #apparently there's a pheader that holds all the bytes forthe rest of the phdrs
+            #apparently there's a pheader that holds all the bytes for the rest of the phdrs
             for i in range(0, len(self.pheaders)):
                 output[index:(index + i * self.phentsize)] = self.pheaders[i].bytes
                 index = index + self.phentsize
